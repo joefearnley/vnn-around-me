@@ -20,6 +20,8 @@ class ArtisanServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->commands('App\Console\InspireCommand');
+		$this->commands('App\Console\VnnScraperCommand');
+		$this->commands('App\Console\VnnGeocodeCommand');
 	}
 
 	/**
@@ -29,7 +31,11 @@ class ArtisanServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return ['App\Console\InspireCommand'];
+		return [
+			'App\Console\InspireCommand',
+			'App\Console\VnnScraperCommand',
+			'App\Console\VnnGeocodeCommand'
+		];
 	}
 
 }

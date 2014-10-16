@@ -16,14 +16,14 @@ class VnnGeocoderCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'command:name';
+	protected $name = 'vnn:geocode';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description.';
+	protected $description = 'Geocode Schools and save data.';
 
 	/**
 	 * Create a new command instance.

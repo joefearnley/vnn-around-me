@@ -14,7 +14,7 @@ class VnnScraperCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = '	scrape';
+	protected $name = 'vnn:scrape';
 
 	/**
 	 * The console command description.
@@ -54,12 +54,12 @@ class VnnScraperCommand extends Command {
 	 */
 	public function fire()
 	{
-		echo "Clearing schools.csv file.\n";
+		$this->info("Clearing schools.csv file.\n";); 
 		File::put(storage_path() . '/temp/schools.csv', '');
 
 		$this->url = 'http://varsitynewsnetwork.com/vnn-partner-schools/';
 
-		echo "Crawling site.\n";
+		$this->info("Crawling site.\n");
 		$this->client = new Goutte\Client();
 		$crawler = $this->client->request('GET', $this->url);
 
@@ -77,7 +77,7 @@ class VnnScraperCommand extends Command {
     		}
 		});
 
-		echo "File written \n";
+		$this->info("File written\n");
 	}
 
 }
