@@ -4,6 +4,9 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
+
 class VnnScraperCommand extends Command {
 
 	/**
@@ -37,15 +40,12 @@ class VnnScraperCommand extends Command {
      */
     private $client;
 
-
     /**
      * URL for page to crawl.
      *
      * @var string
      */
     private $url;
-
-
 
 	/**
 	 * Execute the console command.
@@ -78,30 +78,6 @@ class VnnScraperCommand extends Command {
 		});
 
 		echo "File written \n";
-	}
-
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-		return array(
-			array('example', InputArgument::REQUIRED, 'An example argument.'),
-		);
-	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array(
-			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
-		);
 	}
 
 }
