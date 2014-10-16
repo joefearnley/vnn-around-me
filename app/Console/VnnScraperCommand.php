@@ -14,7 +14,7 @@ class VnnScraperCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'vnn:scrape';
+	protected $name = '	scrape';
 
 	/**
 	 * The console command description.
