@@ -480,16 +480,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "28b51e11237f25cdb0efaea8e45af26007831aa9"
+                "reference": "9e806208d9b418a58ec86c49078aa94385e64bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/28b51e11237f25cdb0efaea8e45af26007831aa9",
-                "reference": "28b51e11237f25cdb0efaea8e45af26007831aa9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9e806208d9b418a58ec86c49078aa94385e64bbd",
+                "reference": "9e806208d9b418a58ec86c49078aa94385e64bbd",
                 "shasum": ""
             },
             "require": {
@@ -534,7 +534,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-10-13 03:05:51"
+            "time": "2014-10-16 18:00:41"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -729,12 +729,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "5c2cfd7b7292ef60ae2b7c22077f00a0a47615c2"
+                "reference": "ba916851321b9233cb56a0fb1deb41043b7df5fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/5c2cfd7b7292ef60ae2b7c22077f00a0a47615c2",
-                "reference": "5c2cfd7b7292ef60ae2b7c22077f00a0a47615c2",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ba916851321b9233cb56a0fb1deb41043b7df5fb",
+                "reference": "ba916851321b9233cb56a0fb1deb41043b7df5fb",
                 "shasum": ""
             },
             "require": {
@@ -841,7 +841,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-10-16 02:23:06"
+            "time": "2014-10-16 18:05:12"
         },
         {
             "name": "league/flysystem",
@@ -849,12 +849,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "30d2bedf2ff4b20645e708d3113bd6e788267ce7"
+                "reference": "2b8e053fb4ce1aa9146dfcb36002c378be29b03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/30d2bedf2ff4b20645e708d3113bd6e788267ce7",
-                "reference": "30d2bedf2ff4b20645e708d3113bd6e788267ce7",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2b8e053fb4ce1aa9146dfcb36002c378be29b03c",
+                "reference": "2b8e053fb4ce1aa9146dfcb36002c378be29b03c",
                 "shasum": ""
             },
             "require": {
@@ -864,6 +864,7 @@
                 "aws/aws-sdk-php": "~2.4",
                 "barracuda/copy": "~1.1.4",
                 "dropbox/dropbox-sdk": "~1.1.1",
+                "ext-fileinfo": "*",
                 "guzzlehttp/guzzle": "~4.0",
                 "league/event": "~1.0",
                 "league/phpunit-coverage-listener": "~1.1",
@@ -880,6 +881,7 @@
                 "aws/aws-sdk-php": "Allows you to use AWS S3 storage",
                 "barracuda/copy": "Allows you to use Copy.com storage",
                 "dropbox/dropbox-sdk": "Allows you to use Dropbox storage",
+                "ext-fileinfo": "Required for MimeType",
                 "guzzlehttp/guzzle": "Allows you to use http files (reading only)",
                 "league/event": "Required for EventableFilesystem",
                 "phpseclib/phpseclib": "Allows SFTP server storage",
@@ -923,7 +925,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2014-10-11 16:17:17"
+            "time": "2014-10-17 14:21:58"
         },
         {
             "name": "monolog/monolog",
@@ -931,12 +933,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "940cbe15abe36924e5693abb585215bb322686a7"
+                "reference": "b738a6c04c5fcc9e304d72f287e25256439fd13e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/940cbe15abe36924e5693abb585215bb322686a7",
-                "reference": "940cbe15abe36924e5693abb585215bb322686a7",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b738a6c04c5fcc9e304d72f287e25256439fd13e",
+                "reference": "b738a6c04c5fcc9e304d72f287e25256439fd13e",
                 "shasum": ""
             },
             "require": {
@@ -995,7 +997,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-10-04 15:43:06"
+            "time": "2014-10-17 18:12:45"
         },
         {
             "name": "nesbot/carbon",
@@ -2056,12 +2058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "26d82e307861f7d0612aa84a2a5fa07dbd0dd3bc"
+                "reference": "2014d64562ceae90018ca2457f7c6d8ed093aceb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/26d82e307861f7d0612aa84a2a5fa07dbd0dd3bc",
-                "reference": "26d82e307861f7d0612aa84a2a5fa07dbd0dd3bc",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/2014d64562ceae90018ca2457f7c6d8ed093aceb",
+                "reference": "2014d64562ceae90018ca2457f7c6d8ed093aceb",
                 "shasum": ""
             },
             "require": {
@@ -2122,7 +2124,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-08 20:39:21"
+            "time": "2014-10-17 07:38:59"
         },
         {
             "name": "symfony/process",
@@ -2580,12 +2582,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237"
+                "reference": "56c252d48dce336da97926591aed71805203815b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
-                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/56c252d48dce336da97926591aed71805203815b",
+                "reference": "56c252d48dce336da97926591aed71805203815b",
                 "shasum": ""
             },
             "require": {
@@ -2623,7 +2625,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2014-10-14 15:06:44"
+            "time": "2014-10-16 14:50:21"
         },
         {
             "name": "willdurand/geocoder",
@@ -2995,12 +2997,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a0d821158f305c48ff401c32bec15f60a878d9c1"
+                "reference": "cd4014775069d7d39d20f617037c2c0f9b4bc25b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a0d821158f305c48ff401c32bec15f60a878d9c1",
-                "reference": "a0d821158f305c48ff401c32bec15f60a878d9c1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cd4014775069d7d39d20f617037c2c0f9b4bc25b",
+                "reference": "cd4014775069d7d39d20f617037c2c0f9b4bc25b",
                 "shasum": ""
             },
             "require": {
@@ -3058,7 +3060,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-10-15 17:08:28"
+            "time": "2014-10-17 09:28:50"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

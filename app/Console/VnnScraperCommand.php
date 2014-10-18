@@ -54,13 +54,13 @@ class VnnScraperCommand extends Command {
 	 */
 	public function fire()
 	{
-		$this->info("Clearing schools.csv file.\n";); 
-		File::put(storage_path() . '/temp/schools.csv', '');
+		$this->info("Clearing schools.csv file.\n");
+		\File::put(storage_path() . '/temp/schools.csv', '');
 
 		$this->url = 'http://varsitynewsnetwork.com/vnn-partner-schools/';
 
 		$this->info("Crawling site.\n");
-		$this->client = new Goutte\Client();
+		$this->client = new \Goutte\Client();
 		$crawler = $this->client->request('GET', $this->url);
 
 		$crawler->filter('.member_state')->each(function($node) {
@@ -73,7 +73,7 @@ class VnnScraperCommand extends Command {
 
         		// write to the csv file
         		$line = $schoolName . "," . $stateName . "," . $schoolUrl . "\n";
-        		File::append(app_path() . '/temp/schools.csv', $line);
+        		\File::append(storage_path() . '/temp/schools.csv', $line);
     		}
 		});
 

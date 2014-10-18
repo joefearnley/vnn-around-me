@@ -21,7 +21,7 @@ class ArtisanServiceProvider extends ServiceProvider {
 	{
 		$this->commands('App\Console\InspireCommand');
 		$this->commands('App\Console\VnnScraperCommand');
-		$this->commands('App\Console\VnnGeocodeCommand');
+		$this->commands('App\Console\VnnGeocoderCommand');
 	}
 
 	/**

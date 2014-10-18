@@ -43,7 +43,7 @@ class VnnGeocoderCommand extends Command {
 	public function fire()
 	{
 		echo "Opening file.\n";
-		$lines = file(app_path() . '/temp/schools.csv', FILE_IGNORE_NEW_LINES);
+		$lines = file(storage_path() . '/temp/schools.csv', FILE_IGNORE_NEW_LINES);
 
 		$schools = [];
 		foreach($lines as $line)
