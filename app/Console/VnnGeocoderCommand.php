@@ -9,6 +9,8 @@ use Ivory\GoogleMap\Services\Geocoding\GeocoderProvider;
 use Geocoder\HttpAdapter\CurlHttpAdapter;
 use Goutte\Client;
 
+use App\School;
+
 class VnnGeocoderCommand extends Command {
 
 	/**
@@ -44,15 +46,16 @@ class VnnGeocoderCommand extends Command {
 	{
 		echo "Opening file.\n";
 		$lines = file(storage_path() . '/temp/schools.csv', FILE_IGNORE_NEW_LINES);
-
+		$this->emptySchoolTable();
 		$schools = [];
+		
 		foreach($lines as $line)
         {
 			if($line != '')
             {
 				list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
 
-				echo "Proccesing School: ". $schoolName . "\n";
+				$this->info("Proccesing School: ". $schoolName);
 
 				$geocoder = new Geocoder();
 				$geocoder->registerProviders(array(
@@ -68,61 +71,76 @@ class VnnGeocoderCommand extends Command {
 
 				$street = str_replace(array("\r", "\n"), '', $addressData[0]);
 
-				if(strpos($street, 'Principal') || strpos($street, 'Director'))
+				// some addresses have the Priciple and/or Athletic Director listed in the area
+				if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
                 {
-					var_dump('checking street 1');
 					$street = str_replace(array("\r", "\n"), '', next($addressData));
 				}
 
-				if(strpos($street, 'Principal') || strpos($street, 'Director'))
+				// some have both
+				if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
                 {
-					var_dump('checking street 2');
 					$street = str_replace(array("\r", "\n"), '', next($addressData));
 				}
 
 				$cityStateZip = str_replace(array("\r", "\n"), '', next($addressData));
+				$address = $street . ' ' . $cityStateZip;
 
-				$address = $schoolName . ' ' . $street . ' ' . $cityStateZip;
+				$response = $this->geocodeAddress($geocoder, $address);
 
-				var_dump($address);
+				if($response !== false)
+				{
+					$results = $response->getResults();
 
-				// Geocode an address
-				$response = $geocoder->geocode($address);
-				$results = $response->getResults();
+					foreach ($results as $result)
+	                {
+						list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
+						$statePostalCode = explode(' ', $statePostalCode);
 
-				foreach ($results as $result)
-                {
-					list($name, $street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
-					$statePostalCode = explode(' ', $statePostalCode);
+						$state = $statePostalCode[1];
+						$zip = $statePostalCode[2];
 
-					if(sizeof($statePostalCode) < 3)
-                    {
-						dd($result->getFormattedAddress());
+						$latitude = $result->getGeometry()->getLocation()->getLatitude();
+						$longitude = $result->getGeometry()->getLocation()->getLongitude();
+
+						$school = new School();
+						$school->name = $schoolName;
+						$school->address = $street;
+						$school->city = $city;
+						$school->state = $statePostalCode[1];
+						$school->zip = $statePostalCode[2];
+						$school->latitude = $latitude;
+						$school->longitude = $longitude;
+						$school->save();
+
+						array_push($schools, $school);
 					}
-
-					$state = $statePostalCode[1];
-					$zip = $statePostalCode[2];
-
-					$latitude = $result->getGeometry()->getLocation()->getLatitude();
-					$longitude = $result->getGeometry()->getLocation()->getLongitude();
-
-					$school = new School();
-					$school->name = $schoolName;
-					$school->address = $street;
-					$school->city = $city;
-					$school->state = $statePostalCode[1];
-					$school->zip = $statePostalCode[2];
-					$school->latitude = $latitude;
-					$school->longitude = $longitude;
-					$school->save();
-
-					array_push($schools, $school);
 				}
 			}
 		}
 
-		var_dump($schools);
-		die();
+		$this->info('Geocoding Complete!');
+	}
+
+	private function geocodeAddress($geocoder, $address)
+	{
+		try {
+			$response = $geocoder->geocode($address);
+		} catch (Guzzle\Http\Exception\ConnectException $e) {
+			$this->info("Error geocoding address: ". $address);
+			$this->info($e->getMessage());
+			return false;
+		}
+
+		return $response;
+	}
+
+	private function emptySchoolTable()
+	{
+		$schools = School::all();
+		foreach ($schools as $school) {
+			$school->delete();
+		}
 	}
 
 }
