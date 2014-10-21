@@ -68,7 +68,6 @@ class VnnGeocoderCommand extends Command {
 				$t = $node->filter('.textwidget p')->html();
 
 				$addressData = explode("<br>", $t);
-
 				$street = str_replace(array("\r", "\n"), '', $addressData[0]);
 
 				// some addresses have the Priciple and/or Athletic Director listed in the area
@@ -126,7 +125,7 @@ class VnnGeocoderCommand extends Command {
 	{
 		try {
 			$response = $geocoder->geocode($address);
-		} catch (Guzzle\Http\Exception\ConnectException $e) {
+		} catch (Exception $e) {
 			$this->info("Error geocoding address: ". $address);
 			$this->info($e->getMessage());
 			return false;
