@@ -267,7 +267,7 @@ a:focus {
 #map {
     width: 100%;
     height: 200px;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 @media(min-width:767px) {
@@ -280,8 +280,7 @@ a:focus {
     }
 
     #map {
-        height: 400px;
-        margin-top: 250px;
+        height: 100%;
     }
 }
 
@@ -331,7 +330,7 @@ ul.banner-social-buttons {
 }
 
 footer {
-    padding: 50px 0;
+    padding: 20px 0;
 }
 
 footer p {
