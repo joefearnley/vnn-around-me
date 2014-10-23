@@ -4,7 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-// jQuery to collapse the navbar on scroll
 $(window).scroll(function() {
     if ($(".navbar").offset().top > 50) {
         $(".navbar-fixed-top").addClass("top-nav-collapse");
@@ -13,20 +12,31 @@ $(window).scroll(function() {
     }
 });
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
 
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            // call back to db and get closest set of coordinates. 
+
+            // plot two points and the directions/distance on a map.
+
+            // update header with closest school and information about it. 
+
+            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var infowindow = new google.maps.InfoWindow({
+                map: map,
+                position: pos,
+                content: 'Location found using HTML5.'
+            });
+
+            map.setCenter(pos);
+        }, function() {
+            console.log('Geolocation service failed.');
+        });
+    } else {
+        console.log('Browser does not support Geolocation');
+    }
 });
 
 // Google Maps Scripts
