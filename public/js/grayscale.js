@@ -16,21 +16,33 @@ $(function() {
 
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
+            console.log('latitude : ' + position.coords.latitude);
+            console.log('longitude : ' + position.coords.longitude);
 
-            // call back to db and get closest set of coordinates. 
+            var jqxhr = $.get( "example.php", function() {
+                alert( "success" );
+            });
+            
+            jqxhr.done(function(response) {
+                console.log('success');
+                var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: pos,
+                    content: 'Location found using HTML5.'
+                });
 
-            // plot two points and the directions/distance on a map.
+                map.setCenter(pos);
 
-            // update header with closest school and information about it. 
+                // plot two points and the directions/distance on a map.
 
-            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Location found using HTML5.'
+                // update header with closest school and information about it. 
+            });
+            
+            jqxhr.fail(function(response) {
+                console.log(response.responseText);
             });
 
-            map.setCenter(pos);
         }, function() {
             console.log('Geolocation service failed.');
         });

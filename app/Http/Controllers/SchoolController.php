@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 
 class SchoolController extends Controller {
 
@@ -8,75 +9,18 @@ class SchoolController extends Controller {
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
+	 * 
+	 * @Get('school/find')
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		//
-	}
+		$latitude = $request->input('latitude');
+		$longitude = $request->input('longitude');
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+		// do the math to find the closest one
+		// and return that School's data
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$school = School::all()->first();
-		return Response::json(school);
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }
