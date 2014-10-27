@@ -19,12 +19,20 @@ $(function() {
             console.log('latitude : ' + position.coords.latitude);
             console.log('longitude : ' + position.coords.longitude);
 
-            var jqxhr = $.get( "example.php", function() {
-                alert( "success" );
-            });
+
+
+            var jqxhr = $.get(
+                '/school/find', 
+                {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
             
             jqxhr.done(function(response) {
                 console.log('success');
+
+                console.log(response);
+
                 var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 var infowindow = new google.maps.InfoWindow({
                     map: map,
