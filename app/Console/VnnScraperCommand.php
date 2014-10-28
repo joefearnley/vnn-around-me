@@ -47,36 +47,36 @@ class VnnScraperCommand extends Command {
      */
     private $url;
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire()
-	{
-		$this->info("Clearing schools.csv file.\n");
-		\File::put(storage_path() . '/temp/schools.csv', '');
+		/**
+		 * Execute the console command.
+		 *
+		 * @return mixed
+		 */
+		public function fire()
+		{
+			$this->info("Clearing schools.csv file.\n");
+			\File::put(storage_path() . '/temp/schools.csv', '');
 
-		$this->url = 'http://varsitynewsnetwork.com/vnn-partner-schools/';
+			$this->url = 'http://varsitynewsnetwork.com/vnn-partner-schools/';
 
-		$this->info("Crawling site.\n");
-		$this->client = new \Goutte\Client();
-		$crawler = $this->client->request('GET', $this->url);
+			$this->info("Crawling site.\n");
+			$this->client = new \Goutte\Client();
+			$crawler = $this->client->request('GET', $this->url);
 
-		$crawler->filter('.member_state')->each(function($node) {
-    		$stateName = $node->filter('h3')->text();
+			$crawler->filter('.member_state')->each(function($node) {
+				$stateName = $node->filter('h3')->text();
 
-    		$list = $node->filter('ul > li a');
-    		foreach ($list as $node) {
-        		$schoolName = $node->nodeValue;
-        		$schoolUrl = $node->getAttribute('href');
+				$list = $node->filter('ul > li a');
+				foreach ($list as $node) {
+					$schoolName = $node->nodeValue;
+					$schoolUrl = $node->getAttribute('href');
 
-        		// write to the csv file
-        		$line = $schoolName . "," . $stateName . "," . $schoolUrl . "\n";
-        		\File::append(storage_path() . '/temp/schools.csv', $line);
-    		}
-		});
+					// write to the csv file
+					$line = $schoolName . "," . $stateName . "," . $schoolUrl . "\n";
+					\File::append(storage_path() . '/temp/schools.csv', $line);
+				}
+			});
 
-		$this->info("File written\n");
-	}
+			$this->info("File written\n");
+		}
 }
