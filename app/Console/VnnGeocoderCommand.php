@@ -49,8 +49,10 @@ class VnnGeocoderCommand extends Command {
 		$this->emptySchoolTable();
 		$schools = [];
 		
+		// alright, lets read through this bitch.
 		foreach($lines as $line)
         {
+        	// in some countries, lines are blank (there are no lines)
 			if($line != '')
             {
 				list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
@@ -121,6 +123,14 @@ class VnnGeocoderCommand extends Command {
 		$this->info('Geocoding Complete!');
 	}
 
+	/**
+	 * Attempt to geocode an address and catch an exception if one is thrown.
+	 * 
+	 * @param Geocoder geocoder
+	 * @param string address
+	 *
+	 * return boolean  
+	 */
 	private function geocodeAddress($geocoder, $address)
 	{
 		try {
@@ -134,6 +144,9 @@ class VnnGeocoderCommand extends Command {
 		return $response;
 	}
 
+	/**
+     * Empty the school table (duh?)
+	 */
 	private function emptySchoolTable()
 	{
 		$schools = School::all();

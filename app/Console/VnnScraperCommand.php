@@ -79,5 +79,4 @@ class VnnScraperCommand extends Command {
 
 		$this->info("File written\n");
 	}
-
 }

@@ -10,20 +10,18 @@ class SchoolController extends Controller {
 	 *
 	 * @return Response
 	 * 
-	 * @Get("school/find")
+	 * @Get('school/find')
 	 */
-	public function find(relation, constraints, tuple)(Request $request)
+	public function find(Request $request)
 	{
-		$latitude = $request->input('latitude');
-		$longitude = $request->input('longitude');
+		//$latitude = $request->input('latitude');
+		//$longitude = $request->input('longitude');
 
-		return "asfasdf";
+		return 'asfasdf';
 		//return return Response::json(['lat' => $latitude, 'lon' => $longitude]);
 
 		// do the math to find the closest one
 		// and return that School's data
-
-
 	}
 
 }

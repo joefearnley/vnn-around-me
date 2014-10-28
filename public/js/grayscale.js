@@ -19,8 +19,6 @@ $(function() {
             console.log('latitude : ' + position.coords.latitude);
             console.log('longitude : ' + position.coords.longitude);
 
-
-
             var jqxhr = $.get(
                 '/school/find', 
                 {
