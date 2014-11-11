@@ -1,10 +1,12 @@
 <?php
 
+require '../vendor/autoload.php';
+
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-$this->info("Clearing schools.csv file.\n");
-\File::put(storage_path() . '/temp/schools.csv', '');
+echo "Clearing schools.csv file.\n";
+file_put_contents('../temp/schools.csv', '');
 
 $url = 'http://varsitynewsnetwork.com/vnn-partner-schools/';
 
@@ -22,7 +24,7 @@ $crawler->filter('.member_state')->each(function($node) {
 
 		// write to the csv file
 		$line = $schoolName . "," . $stateName . "," . $schoolUrl . "\n";
-		\File::append(storage_path() . '/temp/schools.csv', $line);
+		 file_put_contents('../temp/schools.csv', $line, FILE_APPEND);
 	}
 });
 

@@ -1,5 +1,7 @@
 <?php
 
+require '../vendor/autoload.php';
+
 use Ivory\GoogleMap\Services\Geocoding\Geocoder;
 use Ivory\GoogleMap\Services\Geocoding\GeocoderProvider;
 use Geocoder\HttpAdapter\CurlHttpAdapter;
@@ -7,7 +9,7 @@ use Goutte\Client;
 
 echo "Opening file.\n";
 $lines = file(storage_path() . '/temp/schools.csv', FILE_IGNORE_NEW_LINES);
-$this->emptySchoolTable();
+emptySchoolTable();
 $schools = [];
 
 // alright, lets read through this bitch.
