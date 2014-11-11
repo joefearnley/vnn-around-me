@@ -10,3 +10,4 @@ ActiveRecord\Config::initialize(function($config) {
         'production' => 'mysql://vnn:password@localhost/vnnaroundme'
     ]);
 });
+
