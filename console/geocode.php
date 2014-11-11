@@ -1,6 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
+require '../setup.php';
 
 use Ivory\GoogleMap\Services\Geocoding\Geocoder;
 use Ivory\GoogleMap\Services\Geocoding\GeocoderProvider;
@@ -8,7 +9,7 @@ use Geocoder\HttpAdapter\CurlHttpAdapter;
 use Goutte\Client;
 
 echo "Opening file.\n";
-$lines = file(storage_path() . '/temp/schools.csv', FILE_IGNORE_NEW_LINES);
+$lines = file('../temp/schools.csv', FILE_IGNORE_NEW_LINES);
 emptySchoolTable();
 $schools = [];
 
@@ -20,7 +21,12 @@ foreach($lines as $line)
     {
 		list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
 
-		echo "Proccesing School: ". $schoolName;
+		echo "Proccesing School: " . $schoolName . "\n";
+
+		if($schoolName[0] === '#') {
+			echo "Skipping School: " . $schoolName . " because it was commented out.\n";
+			continue;
+		}
 
 		$geocoder = new Geocoder();
 		$geocoder->registerProviders(array(
@@ -50,7 +56,7 @@ foreach($lines as $line)
 		$cityStateZip = str_replace(array("\r", "\n"), '', next($addressData));
 		$address = $street . ' ' . $cityStateZip;
 
-		$response = $this->geocodeAddress($geocoder, $address);
+		$response = geocodeAddress($geocoder, $address);
 
 		if($response !== false)
 		{
@@ -83,7 +89,7 @@ foreach($lines as $line)
 	}
 }
 
-$this->info('Geocoding Complete!');
+echo "Geocoding Complete!\n";
 
 /**
  * Attempt to geocode an address and catch an exception if one is thrown.
@@ -93,13 +99,13 @@ $this->info('Geocoding Complete!');
  *
  * return boolean  
  */
-private function geocodeAddress($geocoder, $address)
+function geocodeAddress($geocoder, $address)
 {
 	try {
 		$response = $geocoder->geocode($address);
 	} catch (Exception $e) {
-		$this->info("Error geocoding address: ". $address);
-		$this->info($e->getMessage());
+		echo "Error geocoding address: " . $address . "\n";
+		echo $e->getMessage();
 		return false;
 	}
 
@@ -109,7 +115,7 @@ private function geocodeAddress($geocoder, $address)
 /**
  * Empty the school table (duh?)
  */
-private function emptySchoolTable()
+function emptySchoolTable()
 {
 	$schools = School::all();
 	foreach ($schools as $school) {
