@@ -21,8 +21,6 @@ $crawler->filter('.member_state')->each(function($node) {
 	foreach ($list as $node) {
 		$schoolName = $node->nodeValue;
 		$schoolUrl = $node->getAttribute('href');
-
-		// write to the csv file
 		$line = $schoolName . "," . $stateName . "," . $schoolUrl . "\n";
 		 file_put_contents('../temp/schools.csv', $line, FILE_APPEND);
 	}

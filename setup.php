@@ -8,9 +8,9 @@ $connections = [
 	'production' => 'mysql://vnn:password@localhost/vnnaroundme'
 ];
 
-ActiveRecord\Config::initialize(function($cfg) use ($connections)
+ActiveRecord\Config::initialize(function($config) use ($connections)
 {
-	$cfg->set_model_directory('../models');
-	$cfg->set_connections($connections);
-	$cfg->set_default_connection('production');
+	$config->set_model_directory('models');
+	$config->set_connections($connections);
+	$config->set_default_connection('production');
 });

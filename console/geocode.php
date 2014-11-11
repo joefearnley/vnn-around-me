@@ -1,12 +1,24 @@
 <?php
 
 require '../vendor/autoload.php';
-require '../setup.php';
 
 use Ivory\GoogleMap\Services\Geocoding\Geocoder;
 use Ivory\GoogleMap\Services\Geocoding\GeocoderProvider;
 use Geocoder\HttpAdapter\CurlHttpAdapter;
 use Goutte\Client;
+
+date_default_timezone_set('America/Detroit');
+
+$connections = [
+	'production' => 'mysql://vnn:password@localhost/vnnaroundme'
+];
+
+ActiveRecord\Config::initialize(function($cfg) use ($connections)
+{
+	$cfg->set_model_directory('../models');
+	$cfg->set_connections($connections);
+	$cfg->set_default_connection('production');
+});
 
 echo "Opening file.\n";
 $lines = file('../temp/schools.csv', FILE_IGNORE_NEW_LINES);
