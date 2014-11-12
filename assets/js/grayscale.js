@@ -29,18 +29,19 @@ $(function() {
             jqxhr.done(function(response) {
                 console.log('success');
 
-                console.log(response);
+                console.log(response.id);
 
-                var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                var infowindow = new google.maps.InfoWindow({
-                    map: map,
-                    position: pos,
-                    content: 'Location found using HTML5.'
-                });
+                // var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                // var infowindow = new google.maps.InfoWindow({
+                //     map: map,
+                //     position: pos,
+                //     content: 'Location found using HTML5.'
+                // });
 
-                map.setCenter(pos);
+                // map.setCenter(pos);
 
                 // plot two points and the directions/distance on a map.
+                
 
                 // update header with closest school and information about it. 
             });
