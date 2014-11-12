@@ -19,35 +19,35 @@ $(function() {
             console.log('latitude : ' + position.coords.latitude);
             console.log('longitude : ' + position.coords.longitude);
 
-            // var jqxhr = $.get(
-            //     '/school/find', 
-            //     {
-            //         latitude: position.coords.latitude,
-            //         longitude: position.coords.longitude
-            //     });
+            var jqxhr = $.get(
+                '/school/find', 
+                {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
             
-            // jqxhr.done(function(response) {
-            //     console.log('success');
+            jqxhr.done(function(response) {
+                console.log('success');
 
-            //     console.log(response);
+                console.log(response);
 
-            //     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            //     var infowindow = new google.maps.InfoWindow({
-            //         map: map,
-            //         position: pos,
-            //         content: 'Location found using HTML5.'
-            //     });
+                var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: pos,
+                    content: 'Location found using HTML5.'
+                });
 
-            //     map.setCenter(pos);
+                map.setCenter(pos);
 
-            //     // plot two points and the directions/distance on a map.
+                // plot two points and the directions/distance on a map.
 
-            //     // update header with closest school and information about it. 
-            // });
+                // update header with closest school and information about it. 
+            });
             
-            // jqxhr.fail(function(response) {
-            //     console.log(response.responseText);
-            // });
+            jqxhr.fail(function(response) {
+                console.log(response.responseText);
+            });
 
         }, function() {
             console.log('Geolocation service failed.');
