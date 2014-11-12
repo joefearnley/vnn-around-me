@@ -42,7 +42,12 @@
             </div>
         </div>
     </nav>
-    <div id="map"></div>
+    <div id="map">
+        <div id="loading">
+            <h3>Loading Map</h3>
+                <h1 class="fa fa-refresh fa-spin"></h1>
+        </div>
+    </div>
     <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">

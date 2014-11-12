@@ -360,3 +360,22 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+#loading {
+    top: 50%;
+    left: 20%;
+    position: absolute;
+    text-align: center;
+}
+
+#loading h3, #loading h1  {
+    margin: auto;
+    line-height: 51px;
+    vertical-align: middle;
+}
+
+@media(min-width: 768px) {
+    #loading {
+        left: 40%;
+    }
+}
