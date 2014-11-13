@@ -4,47 +4,45 @@ require 'vendor/autoload.php';
 require 'setup.php';
 
 $app = new \Slim\Slim(
-	[
-		'debug' => true,
-		'templates.path' => 'views'
-	]
+    [
+        'debug' => true,
+        'templates.path' => 'views'
+    ]
 );
 
 $app->get('/', function () use ($app) {
-	$app->render('home.php');
+    $app->render('home.php');
 });
 
 $app->get('/school/find', function () use ($app) {
-	$latitude = $app->request->get('latitude');
-	$longitude = $app->request->get('longitude');
+    $latitude = $app->request->get('latitude');
+    $longitude = $app->request->get('longitude');
+    $startingPoint = [$latitude, $longitude];
+    $schools =  School::all();
 
-	$startingPoint = [$latitude, $longitude];
+    $items = [];
+    $i = 0;
+    foreach($schools as $school) {
+        $items[$i] = [
+            $school->id,
+            $school->latitude,
+            $school->longitude
+        ];
+        $i++;
+    }
 
-	$schools =  School::all();
+    $distances = array_map(function($item) use ($startingPoint) {
+        $itemLatLon = array_slice($item, -2);
+        return distance($itemLatLon, $startingPoint);
+    }, $items);
 
-	$items = [];
-	$i = 0;
-	foreach($schools as $school) {
-		$items[$i] = [
-			$school->id,
-			$school->latitude,
-			$school->longitude
-		];
-		$i++;
-	}
+    asort($distances);
 
-	$distances = array_map(function($item) use ($startingPoint) {
-		$itemLatLon = array_slice($item, -2);
-	    return distance($itemLatLon, $startingPoint);
-	}, $items);
+    $closestSchool = School::find($items[key($distances)][0]);
 
-	asort($distances);
-
-	$closestSchool = School::find($items[key($distances)][0]);
-
-	header("Content-Type: application/json");
-	echo $closestSchool->to_json();
-	exit;
+    header("Content-Type: application/json");
+    echo $closestSchool->to_json();
+    exit;
 });
 
 /**
