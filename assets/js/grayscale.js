@@ -17,23 +17,21 @@ $(function() {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
-            
+
             jqxhr.done(function(response) {
-                console.log('success');
+            console.log('success');
 
-                // load the map
-                loadMap(position, response);
+            // load the map
+            loadMap(position, response);
 
-                // update header with closest school and information about it. 
+            // update header with closest school and information about it. 
+        });
 
+        jqxhr.fail(function(response) {
+            console.log(response.responseText);
+        });
 
-            });
-            
-            jqxhr.fail(function(response) {
-                console.log(response.responseText);
-            });
-
-        }, function() {
+    }, function() {
             console.log('Geolocation service failed.');
         });
     } else {
@@ -75,34 +73,35 @@ function loadMap(position, school) {
         request,
         function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                // new google.maps.DirectionsRenderer({
-                //     map: map,
-                //     directions: response
+            // new google.maps.DirectionsRenderer({
+            //     map: map,
+            //     directions: response
+            // });
+            var route = response.routes[0].legs[0];
+
+            for (var i = 0; i < route.steps.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: route.steps[i].start_location,
+                    map: map
+                });
+
+                //attachInstructionText(marker, myRoute.steps[i].instructions);
+                // google.maps.event.addListener(marker, 'click', function() {
                 // });
-                var route = response.routes[0].legs[0];
 
-                for (var i = 0; i < route.steps.length; i++) {
-                    var marker = new google.maps.Marker({
-                        position: route.steps[i].start_location,
-                        map: map
-                    });
-                    
-                    //attachInstructionText(marker, myRoute.steps[i].instructions);
-                    // google.maps.event.addListener(marker, 'click', function() {
-                    // });
-
-                    var beachMarker = new google.maps.Marker({
-                        position: myLatLng,
-                        map: map,
-                    });
-                    var inforWindow = new google.maps.InfoWindow();
-                    inforWindow.setContent('Blah');
-                    inforWindow.open(map, marker);
-                    //markerArray[i] = marker;
-                }
-
-            } else {
-                console.log("Unable to retrieve your route");
+                var beachMarker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                });
+        
+                var inforWindow = new google.maps.InfoWindow();
+                inforWindow.setContent('Blah');
+                inforWindow.open(map, marker);
+                //markerArray[i] = marker;
             }
-        });
+
+        } else {
+            console.log("Unable to retrieve your route");
+        }
+    });
 }

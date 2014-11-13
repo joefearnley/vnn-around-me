@@ -1,9 +1,9 @@
 {
     "require": {
-		"slim/slim": "2.*",
-		"fabpot/goutte": "~2.0",
-		"willdurand/geocoder": "*",
-		"egeloen/google-map": "1.4.*@dev",
-		"php-activerecord/php-activerecord": "dev-master"
+        "slim/slim": "2.*",
+        "fabpot/goutte": "~2.0",
+        "willdurand/geocoder": "*",
+        "egeloen/google-map": "1.4.*@dev",
+        "php-activerecord/php-activerecord": "dev-master"
     }
 }
