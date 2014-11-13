@@ -30,7 +30,7 @@ foreach($lines as $line)
 {
 	// in some countries, lines are blank (there are no lines)
 	if($line != '')
-    {
+	{
 		list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
 
 		echo "Proccesing School: " . $schoolName . "\n";
@@ -42,7 +42,7 @@ foreach($lines as $line)
 
 		$geocoder = new Geocoder();
 		$geocoder->registerProviders(array(
-    		new GeocoderProvider(new CurlHttpAdapter()),
+		new GeocoderProvider(new CurlHttpAdapter()),
 		));
 
 		$client = new Client();
@@ -55,13 +55,13 @@ foreach($lines as $line)
 
 		// some addresses have the Priciple and/or Athletic Director listed in the area
 		if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
-        {
+		{
 			$street = str_replace(array("\r", "\n"), '', next($addressData));
 		}
 
 		// some have both
 		if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
-        {
+		{
 			$street = str_replace(array("\r", "\n"), '', next($addressData));
 		}
 
@@ -75,7 +75,7 @@ foreach($lines as $line)
 			$results = $response->getResults();
 
 			foreach ($results as $result)
-            {
+			{
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
 				$statePostalCode = explode(' ', $statePostalCode);
 
@@ -120,7 +120,6 @@ function geocodeAddress($geocoder, $address)
 		echo $e->getMessage();
 		return false;
 	}
-
 	return $response;
 }
 
