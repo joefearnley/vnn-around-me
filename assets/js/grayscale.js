@@ -61,28 +61,27 @@ function loadMap(position, school) {
                 suppressMarkers: true
             });
 
+            var startInfowindow = new google.maps.InfoWindow({
+            });
+
             var route = response.routes[0].legs[0];
             var startMarker = new google.maps.Marker({
                 position: route.start_location,
                 map: map,
-                animation: google.maps.Animation.DROP,
-                title: 'sadfasdf'
+                animation: google.maps.Animation.DROP
             });
-            var startInfowindow = new google.maps.InfoWindow({
-                content: 'Start'
-            });
-            startInfowindow.open(map, startInfowindow);
+            startInfowindow.setContent('lsakdfalks');
+            startInfowindow.open(map, startMarker); 
 
-            // var endMarker = new google.maps.Marker({
-            //     position: route.end_location,
-            //     map: map,
-            //     animation: google.maps.Animation.DROP,
-            //     title: 'fasfdasd'
-            // });
-            // var endInfowindow = new google.maps.InfoWindow({
-            //     content: 'End'
-            // });
-            // endInfowindow.open(map, endMarker);
+            var endMarker = new google.maps.Marker({
+                position: route.end_location,
+                map: map,
+                animation: google.maps.Animation.DROP
+            });
+             var endInfowindow = new google.maps.InfoWindow({
+            });
+            endInfowindow.setContent('lsakdfalks');
+            endInfowindow.open(map, endMarker); 
         } else {
             console.log("Unable to retrieve your route");
         }
