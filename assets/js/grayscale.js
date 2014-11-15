@@ -82,6 +82,10 @@ function loadMap(position, school) {
             });
             endInfowindow.setContent('lsakdfalks');
             endInfowindow.open(map, endMarker); 
+
+            // TODO: add click events to each marker/infowindow
+
+
         } else {
             console.log("Unable to retrieve your route");
         }
