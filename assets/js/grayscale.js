@@ -83,7 +83,7 @@ function loadMap(position, school) {
             endInfowindow.setContent('lsakdfalks');
             endInfowindow.open(map, endMarker); 
 
-            // TODO: add click events to each marker/infowindow
+            // TODO: add click events to each marker/InfoWindow
 
 
         } else {
