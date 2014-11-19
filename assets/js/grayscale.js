@@ -61,16 +61,14 @@ function loadMap(position, school) {
                 suppressMarkers: true
             });
 
-            var startInfowindow = new google.maps.InfoWindow({
-            });
-
             var route = response.routes[0].legs[0];
             var startMarker = new google.maps.Marker({
                 position: route.start_location,
                 map: map,
                 animation: google.maps.Animation.DROP
             });
-            startInfowindow.setContent('lsakdfalks');
+            var startInfowindow = new google.maps.InfoWindow();
+            startInfowindow.setContent('Starting Point');
             startInfowindow.open(map, startMarker); 
 
             var endMarker = new google.maps.Marker({
@@ -78,9 +76,9 @@ function loadMap(position, school) {
                 map: map,
                 animation: google.maps.Animation.DROP
             });
-             var endInfowindow = new google.maps.InfoWindow({
-            });
-            endInfowindow.setContent('lsakdfalks');
+            
+            var endInfowindow = new google.maps.InfoWindow();
+            endInfowindow.setContent('Ending point');
             endInfowindow.open(map, endMarker); 
 
             // TODO: add click events to each marker/InfoWindow
