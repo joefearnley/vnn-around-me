@@ -84,11 +84,18 @@ function loadMap(position, school) {
                 title: 'End Point'
             });
 
+            console.log(school);
+
             var endingMarkerContent = '<div class="marker-info">'+
                     '<h4>'+school.name+'</h4>'+
                     '<div>'+school.address+'<br>'+
-                    school.city+' '+school.state+' '+school.zip
-                    '</div></div>';
+                    school.city+' '+school.state+' '+school.zip;
+
+            if(school.url !== undefined) {
+                endingMarkerContent += '<br><a href="'+school.url+'" target="_blank">'+school.url+'</a>';
+            }
+
+            endingMarkerContent += '</div></div>';
                 
             var endInfowindow = new google.maps.InfoWindow();
             endInfowindow.setContent(endingMarkerContent);

@@ -93,6 +93,7 @@ foreach($lines as $line)
 				$school->zip = $statePostalCode[2];
 				$school->latitude = $latitude;
 				$school->longitude = $longitude;
+				$school->url = $schoolUrl;
 				$school->save();
 
 				array_push($schools, $school);
@@ -132,4 +133,6 @@ function emptySchoolTable()
 	foreach ($schools as $school) {
 		$school->delete();
 	}
+
+	School::query('ALTER TABLE schools AUTO_INCREMENT = 1;');
 }
