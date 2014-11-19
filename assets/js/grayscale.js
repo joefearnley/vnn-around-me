@@ -15,7 +15,6 @@ $(function() {
             });
 
             jqxhr.done(function(response) {
-                console.log('success');
                 loadMap(position, response);
                 // update header with closest school and information about it. 
             });
@@ -65,25 +64,39 @@ function loadMap(position, school) {
             var startMarker = new google.maps.Marker({
                 position: route.start_location,
                 map: map,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                title: 'Start Point'
             });
-            var startInfowindow = new google.maps.InfoWindow();
-            startInfowindow.setContent('Starting Point');
-            startInfowindow.open(map, startMarker); 
+
+            var startingMarkerContent = '<div class="marker-info">You are Here</div>';
+            var startInfoWindow = new google.maps.InfoWindow();
+            startInfoWindow.setContent(startingMarkerContent);
+            startInfoWindow.open(map, startMarker); 
+
+            google.maps.event.addListener(startMarker, 'click', function() {
+                startInfoWindow.open(map, startMarker);
+            });
 
             var endMarker = new google.maps.Marker({
                 position: route.end_location,
                 map: map,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                title: 'End Point'
             });
-            
+
+            var endingMarkerContent = '<div class="marker-info">'+
+                    '<h4>'+school.name+'</h4>'+
+                    '<div>'+school.address+'<br>'+
+                    school.city+' '+school.state+' '+school.zip
+                    '</div></div>';
+                
             var endInfowindow = new google.maps.InfoWindow();
-            endInfowindow.setContent('Ending point');
+            endInfowindow.setContent(endingMarkerContent);
             endInfowindow.open(map, endMarker); 
 
-            // TODO: add click events to each marker/InfoWindow
-
-
+            google.maps.event.addListener(endMarker, 'click', function() {
+                endInfoWindow.open(map, endMarker);
+            });
         } else {
             console.log("Unable to retrieve your route");
         }
