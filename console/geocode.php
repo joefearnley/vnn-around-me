@@ -45,12 +45,31 @@ foreach($lines as $line)
 		new GeocoderProvider(new CurlHttpAdapter()),
 		));
 
-		$client = new Client();
-		$crawler = $client->request('GET', $schoolUrl);
-		$node = $crawler->filter('#footer_widget_area_1');
-		$t = $node->filter('.textwidget p')->html();
+		try {
+			$client = new Client();
+			$crawler = $client->request('GET', $schoolUrl);
+		} catch (Exception $e) {
+			echo 'Error encountered geocoding school : ' . $e->getMessage();
+			continue;
+		}
 
-		$addressData = explode("<br>", $t);
+		$node = $crawler->filter('#footer_widget_area_1');
+		$contactData = $node->filter('.textwidget p')->html();
+		$contactData = explode("<br>", $contactData);
+
+		$addressData = [];
+		foreach($contactData as $data) {
+			$data = $street = str_replace(array("\r", "\n"), '', $addressData[0]);
+			if()
+			{
+				array_push($addressData, $data);
+			}
+		}
+
+		echo '<pre>';
+		var_dump($addressData);
+		die();
+
 		$street = str_replace(array("\r", "\n"), '', $addressData[0]);
 
 		// some addresses have the Priciple and/or Athletic Director listed in the area
@@ -61,6 +80,16 @@ foreach($lines as $line)
 
 		// some have both
 		if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
+		{
+			$street = str_replace(array("\r", "\n"), '', next($addressData));
+		}
+
+		if(strpos($street, '@') !== false)
+		{
+			$street = str_replace(array("\r", "\n"), '', next($addressData));
+		}
+
+		if(strpos($street, '@') !== false)
 		{
 			$street = str_replace(array("\r", "\n"), '', next($addressData));
 		}
@@ -76,6 +105,9 @@ foreach($lines as $line)
 
 			foreach ($results as $result)
 			{
+				echo '<pre>';
+				var_dump($result->getFormattedAddress());
+				die();
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
 				$statePostalCode = explode(' ', $statePostalCode);
 
