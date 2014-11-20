@@ -1,5 +1,6 @@
-A H Parker High School,Alabama,http://parkerhighathletics.com 
+#A H Parker High School,Alabama,http://parkerhighathletics.com
 Cloverdale High School,Indiana,http://cloverathletics.com
+#Dade County High School,Georgia,http://dadecountyathletics.com
 Bessemer Academy,Alabama,http://bessemerathletics.com
 Boaz High School,Alabama,http://boazathletics.com
 Bob Jones High School,Alabama,http://bobjonesathletics.com
@@ -28,18 +29,17 @@ Gunnison High School,Colorado,http://ghsathletics.com
 Prairie View High School,Colorado,http://pvhsathletics.com
 Jones High School,Florida,http://joneshighathletics.com
 Alpharetta High School,Georgia,http://alpharettaathletics.com
-#Berkmar High School,Georgia,http://bermkarathletics.com
+Berkmar High School,Georgia,http://bermkarathletics.com
 Cartersville High School,Georgia,http://canesathletics.com
 Centennial High School,Georgia,http://centennialathletics.com
 Creekview High School,Georgia,http://cvhsgrizzlies.net
-#Dade County High School,Georgia,http://dadecountyathletics.com
 Forsyth Central High School,Georgia,http://forsythcentralathletics.com
 KIPP Atlanta Collegiate High School,Georgia,http://KippAtlantaCollegiateAthletics.com
-#Martin Luther King, Jr High School,Georgia,http://martinlutherkingathletics.com
+Martin Luther King, Jr High School,Georgia,http://martinlutherkingathletics.com
 Meadowcreek High School,Georgia,http://meadowcreekathletics.org
 Milton High School,Georgia,http://miltonathletics.com
 North Atlanta High School,Georgia,http://northatlantawarriors.org
-#Peachtree Ridge High School,Georgia,http://prhslions.com 
+Peachtree Ridge High School,Georgia,http://prhslions.com 
 Sprayberry High School,Georgia,http://sprayberryathletics.com
 Thomasville High School,Georgia,http://bulldogsathletics.com
 Meridian,Idaho,http://meridianathletics.com
@@ -116,7 +116,7 @@ Rochester High School,Indiana,http://zebraathletics.net
 Rossville High School,Indiana,http://gohornetsathletics.com
 South Adams High School,Indiana,http://starfireathletics.com
 South Dearborn High School,Indiana,http://southdearbornathletics.com
-#South Putnam High School,Indiana,http://sputnamathletics.com
+South Putnam High School,Indiana,http://sputnamathletics.com
 South Spencer High School,Indiana,http://southspencerathletics.com
 Southmont Senior High School,Indiana,http://gomountiessports.com
 Southwood High School,Indiana,http://southwoodknightsathletics.com
@@ -166,7 +166,7 @@ Brandon High School,Michigan,http://brandonblackhawks.org
 Byron Center High School,Michigan,http://byroncentersports.com
 Calumet High School,Michigan,http://calumetathletics.com
 Calvin Christian High School,Michigan,http://calvinchristiansports.com
-#Canton High School,Michigan,http://cantonathletics.com 
+Canton High School,Michigan,http://cantonathletics.com 
 Capac High School,Michigan,http://capacathletics.com
 Carlson High School,Michigan,http://carlsonathletics.com
 Carrollton High School,Michigan,http://cavsathletics.com
@@ -227,7 +227,7 @@ Kearsley High School,Michigan,http://kearsleyhornets.org
 Kent City High School,Michigan,http://kentcityathletics.com
 L'Anse Creuse High School,Michigan,http://lancercountryathletics.com
 L'Anse Creuse North High School,Michigan,http://lcncrusaders.com
-Ladywood High School,Michigan,http://ladywoodathletics.com
+#Ladywood High School,Michigan,http://ladywoodathletics.com
 LakeVille High School,Michigan,http://lakeville-athletics.com
 Lakeland High School,Michigan,http://lhseagles.com
 Lakeshore High School,Michigan,http://lakeshorelancerathletics.com
@@ -235,7 +235,7 @@ Lansing Catholic High School,Michigan,http://lansingcatholicathletics.com
 Lansing Christian High School,Michigan,http://lcpilgrims.com
 Lapeer High School,Michigan,http://lapeerlightning.com
 Lincoln High School,Michigan,http://splitternation.org
-Lowell High School,Michigan,http://redarrowathletics.com
+#Lowell High School,Michigan,http://redarrowathletics.com
 Loy Norrix High School,Michigan,http://loynorrixknights.com
 Manchester High School,Michigan,http://manchesterdutchmen.com
 Marian High School,Michigan,http://mariansports.com

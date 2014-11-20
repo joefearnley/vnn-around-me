@@ -59,42 +59,16 @@ foreach($lines as $line)
 
 		$addressData = [];
 		foreach($contactData as $data) {
-			$data = $street = str_replace(array("\r", "\n"), '', $addressData[0]);
-			if()
+			$data = str_replace(array("\r", "\n"), '', $data);
+			if(strpos($data, 'Principal') === false && strpos($data, 'Director') === false &&
+				strpos($data, '@') === false && strpos($data, ')') === false)
 			{
 				array_push($addressData, $data);
 			}
 		}
 
-		echo '<pre>';
-		var_dump($addressData);
-		die();
-
-		$street = str_replace(array("\r", "\n"), '', $addressData[0]);
-
-		// some addresses have the Priciple and/or Athletic Director listed in the area
-		if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
-		{
-			$street = str_replace(array("\r", "\n"), '', next($addressData));
-		}
-
-		// some have both
-		if(strpos($street, 'Principal') !== false || strpos($street, 'Director') !== false)
-		{
-			$street = str_replace(array("\r", "\n"), '', next($addressData));
-		}
-
-		if(strpos($street, '@') !== false)
-		{
-			$street = str_replace(array("\r", "\n"), '', next($addressData));
-		}
-
-		if(strpos($street, '@') !== false)
-		{
-			$street = str_replace(array("\r", "\n"), '', next($addressData));
-		}
-
-		$cityStateZip = str_replace(array("\r", "\n"), '', next($addressData));
+		$street = $addressData[0];
+		$cityStateZip = $addressData[1];
 		$address = $street . ' ' . $cityStateZip;
 
 		$response = geocodeAddress($geocoder, $address);
@@ -105,9 +79,6 @@ foreach($lines as $line)
 
 			foreach ($results as $result)
 			{
-				echo '<pre>';
-				var_dump($result->getFormattedAddress());
-				die();
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
 				$statePostalCode = explode(' ', $statePostalCode);
 
