@@ -1,6 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
+require '../config/database.php';
 
 use Ivory\GoogleMap\Services\Geocoding\Geocoder;
 use Ivory\GoogleMap\Services\Geocoding\GeocoderProvider;
@@ -8,10 +9,6 @@ use Geocoder\HttpAdapter\CurlHttpAdapter;
 use Goutte\Client;
 
 date_default_timezone_set('America/Detroit');
-
-$connections = [
-	'production' => 'mysql://vnn:password@localhost/vnnaroundme'
-];
 
 ActiveRecord\Config::initialize(function($cfg) use ($connections)
 {
