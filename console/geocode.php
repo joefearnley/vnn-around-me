@@ -73,7 +73,6 @@ foreach($lines as $line)
 		if($response !== false)
 		{
 			$results = $response->getResults();
-
 			foreach ($results as $result)
 			{
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
