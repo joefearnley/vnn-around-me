@@ -10,11 +10,11 @@ use Goutte\Client;
 
 date_default_timezone_set('America/Detroit');
 
-ActiveRecord\Config::initialize(function($cfg) use ($connections)
+ActiveRecord\Config::initialize(function($config) use ($connections)
 {
-	$cfg->set_model_directory('../models');
-	$cfg->set_connections($connections);
-	$cfg->set_default_connection('production');
+	$config->set_model_directory('../models');
+	$config->set_connections($connections);
+	$config->set_default_connection('production');
 });
 
 echo "Opening file.\n";
@@ -39,7 +39,7 @@ foreach($lines as $line)
 
 		$geocoder = new Geocoder();
 		$geocoder->registerProviders(array(
-		new GeocoderProvider(new CurlHttpAdapter()),
+			new GeocoderProvider(new CurlHttpAdapter()),
 		));
 
 		try {
@@ -70,9 +70,18 @@ foreach($lines as $line)
 
 		$response = geocodeAddress($geocoder, $address);
 
+		echo '<pre>';
+		var_dump($response);
+		die();
+
 		if($response !== false)
 		{
 			$results = $response->getResults();
+
+				echo '<pre>';
+				var_dump($results);
+				die();
+
 			foreach ($results as $result)
 			{
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
@@ -94,8 +103,6 @@ foreach($lines as $line)
 				$school->longitude = $longitude;
 				$school->url = $schoolUrl;
 				$school->save();
-
-				array_push($schools, $school);
 			}
 		}
 	}
