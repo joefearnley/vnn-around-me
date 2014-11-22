@@ -69,19 +69,9 @@ foreach($lines as $line)
 		$address = $street . ' ' . $cityStateZip;
 
 		$response = geocodeAddress($geocoder, $address);
-
-		echo '<pre>';
-		var_dump($response);
-		die();
-
 		if($response !== false)
 		{
 			$results = $response->getResults();
-
-				echo '<pre>';
-				var_dump($results);
-				die();
-
 			foreach ($results as $result)
 			{
 				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
