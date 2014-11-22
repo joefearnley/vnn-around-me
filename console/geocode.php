@@ -69,6 +69,11 @@ foreach($lines as $line)
 		$address = $street . ' ' . $cityStateZip;
 
 		$response = geocodeAddress($geocoder, $address);
+
+		if($response->getStatus() === 'OVER_QUERY_LIMIT') {
+			die("\nOver Query Limit. Exiting.\n\n");
+		}
+
 		if($response !== false)
 		{
 			$results = $response->getResults();
