@@ -122,7 +122,7 @@ function geocodeAddress($geocoder, $address)
 		echo $e->getMessage();
 		return false;
 	}
-	return $response;
+    return $response;
 }
 
 /**
