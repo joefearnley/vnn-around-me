@@ -83,9 +83,7 @@ function loadMap(position, school) {
                 animation: google.maps.Animation.DROP,
                 title: 'End Point'
             });
-
-            console.log(school);
-
+            
             var endingMarkerContent = '<div class="marker-info">'+
                     '<h4>'+school.name+'</h4>'+
                     '<div>'+school.address+'<br>'+
