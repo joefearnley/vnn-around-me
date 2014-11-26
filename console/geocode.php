@@ -12,9 +12,9 @@ date_default_timezone_set('America/Detroit');
 
 ActiveRecord\Config::initialize(function($config) use ($connections)
 {
-	$config->set_model_directory('../models');
-	$config->set_connections($connections);
-	$config->set_default_connection('production');
+    $config->set_model_directory('../models');
+    $config->set_connections($connections);
+    $config->set_default_connection('production');
 });
 
 echo "Opening file.\n";
@@ -25,82 +25,82 @@ $schools = [];
 // alright, lets read through this bitch.
 foreach($lines as $line)
 {
-	// in some countries, lines are blank (there are no lines)
-	if($line != '')
-	{
-		list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
+    // in some countries, lines are blank (there are no lines)
+    if($line != '')
+    {
+        list($schoolName, $schoolState, $schoolUrl) = explode(',', $line);
 
-		echo "Proccesing School: " . $schoolName . "\n";
+        echo "Proccesing School: " . $schoolName . "\n";
 
-		if($schoolName[0] === '#') {
-			echo "Skipping School: " . $schoolName . " because it was commented out.\n";
-			continue;
-		}
+        if($schoolName[0] === '#') {
+            echo "Skipping School: " . $schoolName . " because it was commented out.\n";
+            continue;
+        }
 
-		$geocoder = new Geocoder();
-		$geocoder->registerProviders(array(
-			new GeocoderProvider(new CurlHttpAdapter()),
-		));
+        $geocoder = new Geocoder();
+        $geocoder->registerProviders(array(
+            new GeocoderProvider(new CurlHttpAdapter()),
+        ));
 
-		try {
-			$client = new Client();
-			$crawler = $client->request('GET', $schoolUrl);
-		} catch (Exception $e) {
-			echo 'Error encountered geocoding school : ' . $e->getMessage();
-			continue;
-		}
+        try {
+            $client = new Client();
+            $crawler = $client->request('GET', $schoolUrl);
+        } catch (Exception $e) {
+            echo 'Error encountered geocoding school : ' . $e->getMessage();
+            continue;
+        }
 
-		$node = $crawler->filter('#footer_widget_area_1');
-		$contactData = $node->filter('.textwidget p')->html();
-		$contactData = explode("<br>", $contactData);
+        $node = $crawler->filter('#footer_widget_area_1');
+        $contactData = $node->filter('.textwidget p')->html();
+        $contactData = explode("<br>", $contactData);
 
-		$addressData = [];
-		foreach($contactData as $data) {
-			$data = str_replace(array("\r", "\n"), '', $data);
-			if(strpos($data, 'Principal') === false && strpos($data, 'Director') === false &&
-				strpos($data, '@') === false && strpos($data, ')') === false)
-			{
-				array_push($addressData, $data);
-			}
-		}
+        $addressData = [];
+        foreach($contactData as $data) {
+            $data = str_replace(array("\r", "\n"), '', $data);
+            if(strpos($data, 'Principal') === false && strpos($data, 'Director') === false &&
+                strpos($data, '@') === false && strpos($data, ')') === false)
+            {
+                array_push($addressData, $data);
+            }
+        }
 
-		$street = $addressData[0];
-		$cityStateZip = $addressData[1];
-		$address = $street . ' ' . $cityStateZip;
+        $street = $addressData[0];
+        $cityStateZip = $addressData[1];
+        $address = $street . ' ' . $cityStateZip;
 
-		$response = geocodeAddress($geocoder, $address);
+        $response = geocodeAddress($geocoder, $address);
 
-		if($response->getStatus() === 'OVER_QUERY_LIMIT') {
-			die("\nOver Query Limit. Exiting.\n\n");
-		}
+        if($response->getStatus() === 'OVER_QUERY_LIMIT') {
+            die("\nOver Query Limit. Exiting.\n\n");
+        }
 
-		if($response !== false)
-		{
-			$results = $response->getResults();
-			foreach ($results as $result)
-			{
-				list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
-				$statePostalCode = explode(' ', $statePostalCode);
+        if($response !== false)
+        {
+            $results = $response->getResults();
+            foreach ($results as $result)
+            {
+                list($street, $city, $statePostalCode) = explode(',', $result->getFormattedAddress());
+                $statePostalCode = explode(' ', $statePostalCode);
 
-				$state = $statePostalCode[1];
-				$zip = $statePostalCode[2];
+                $state = $statePostalCode[1];
+                $zip = $statePostalCode[2];
 
-				$latitude = $result->getGeometry()->getLocation()->getLatitude();
-				$longitude = $result->getGeometry()->getLocation()->getLongitude();
+                $latitude = $result->getGeometry()->getLocation()->getLatitude();
+                $longitude = $result->getGeometry()->getLocation()->getLongitude();
 
-				$school = new School();
-				$school->name = $schoolName;
-				$school->address = $street;
-				$school->city = $city;
-				$school->state = $statePostalCode[1];
-				$school->zip = $statePostalCode[2];
-				$school->latitude = $latitude;
-				$school->longitude = $longitude;
-				$school->url = $schoolUrl;
-				$school->save();
-			}
-		}
-	}
+                $school = new School();
+                $school->name = $schoolName;
+                $school->address = $street;
+                $school->city = $city;
+                $school->state = $statePostalCode[1];
+                $school->zip = $statePostalCode[2];
+                $school->latitude = $latitude;
+                $school->longitude = $longitude;
+                $school->url = $schoolUrl;
+                $school->save();
+            }
+        }
+    }
 }
 
 echo "Geocoding Complete!\n";
@@ -115,13 +115,13 @@ echo "Geocoding Complete!\n";
  */
 function geocodeAddress($geocoder, $address)
 {
-	try {
-		$response = $geocoder->geocode($address);
-	} catch (Exception $e) {
-		echo "Error geocoding address: " . $address . "\n";
-		echo $e->getMessage();
-		return false;
-	}
+    try {
+        $response = $geocoder->geocode($address);
+    } catch (Exception $e) {
+        echo "Error geocoding address: " . $address . "\n";
+        echo $e->getMessage();
+        return false;
+    }
     return $response;
 }
 
