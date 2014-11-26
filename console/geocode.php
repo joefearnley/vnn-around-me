@@ -130,10 +130,10 @@ function geocodeAddress($geocoder, $address)
  */
 function emptySchoolTable()
 {
-	$schools = School::all();
-	foreach ($schools as $school) {
-		$school->delete();
-	}
+    $schools = School::all();
+    foreach ($schools as $school) {
+        $school->delete();
+    }
 
-	School::query('ALTER TABLE schools AUTO_INCREMENT = 1;');
+    School::query('ALTER TABLE schools AUTO_INCREMENT = 1;');
 }
