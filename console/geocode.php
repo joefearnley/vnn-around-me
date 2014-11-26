@@ -32,20 +32,23 @@ foreach($lines as $line)
 
         echo "Proccesing School: " . $schoolName . "\n";
 
-        if($schoolName[0] === '#') {
+        if($schoolName[0] === '#') 
+        {
             echo "Skipping School: " . $schoolName . " because it was commented out.\n";
             continue;
         }
 
         $geocoder = new Geocoder();
-        $geocoder->registerProviders(array(
-            new GeocoderProvider(new CurlHttpAdapter()),
-        ));
+        $provider = new GeocoderProvider(new CurlHttpAdapter());
+        $geocoder->registerProviders([$provider]);
 
-        try {
+        try 
+        {
             $client = new Client();
             $crawler = $client->request('GET', $schoolUrl);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) 
+        {
             echo 'Error encountered geocoding school : ' . $e->getMessage();
             continue;
         }
@@ -55,7 +58,8 @@ foreach($lines as $line)
         $contactData = explode("<br>", $contactData);
 
         $addressData = [];
-        foreach($contactData as $data) {
+        foreach($contactData as $data) 
+        {
             $data = str_replace(array("\r", "\n"), '', $data);
             if(strpos($data, 'Principal') === false && strpos($data, 'Director') === false &&
                 strpos($data, '@') === false && strpos($data, ')') === false)
@@ -70,7 +74,8 @@ foreach($lines as $line)
 
         $response = geocodeAddress($geocoder, $address);
 
-        if($response->getStatus() === 'OVER_QUERY_LIMIT') {
+        if($response->getStatus() === 'OVER_QUERY_LIMIT') 
+        {
             die("\nOver Query Limit. Exiting.\n\n");
         }
 
@@ -115,9 +120,12 @@ echo "Geocoding Complete!\n";
  */
 function geocodeAddress($geocoder, $address)
 {
-    try {
+    try 
+    {
         $response = $geocoder->geocode($address);
-    } catch (Exception $e) {
+    } 
+    catch (Exception $e) 
+    {
         echo "Error geocoding address: " . $address . "\n";
         echo $e->getMessage();
         return false;
@@ -131,7 +139,8 @@ function geocodeAddress($geocoder, $address)
 function emptySchoolTable()
 {
     $schools = School::all();
-    foreach ($schools as $school) {
+    foreach ($schools as $school) 
+    {
         $school->delete();
     }
 
