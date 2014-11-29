@@ -20,7 +20,9 @@ $(function() {
             });
 
             jqxhr.fail(function(response) {
-                console.log(response);
+                if(response.status == '404') {
+                    $('#map').html(response.responseText);
+                }
             });
         }, function() {
             console.log('Geolocation service failed.');
