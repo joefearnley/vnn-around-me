@@ -53,8 +53,8 @@
                 <p>
                     VNN Around Me finds the school nearest you that is part of 
                     <a href="http://varsitynewsnetwork.com/">Varsity News Network</a>. I 
-                    (<a href="htt://twitter.com/joefearnley">@joefearnley</a>) created it as way to learn
-                    more about HTML5 geolocation.
+                    (<a href="htt://twitter.com/joefearnley">@joefearnley</a>) created 
+                    it as way to learn more about HTML5 geolocation.
                 </p>
                 <p>
                     The source code for it is 
