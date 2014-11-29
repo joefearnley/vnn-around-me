@@ -20,7 +20,7 @@ $(function() {
             });
 
             jqxhr.fail(function(response) {
-                console.log(response.responseText);
+                console.log(response);
             });
         }, function() {
             console.log('Geolocation service failed.');
@@ -83,7 +83,7 @@ function loadMap(position, school) {
                 animation: google.maps.Animation.DROP,
                 title: 'End Point'
             });
-            
+
             var endingMarkerContent = '<div class="marker-info">'+
                     '<h4>'+school.name+'</h4>'+
                     '<div>'+school.address+'<br>'+
