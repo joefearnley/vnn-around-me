@@ -25,7 +25,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-map-marker"></i>  <span class="light">VNN </span> Around Me 
+                    <i class="fa fa-map-marker"></i> VNN Around Me 
                 </a>
             </div>
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
@@ -53,7 +53,7 @@
                 <p>
                     VNN Around Me finds the school nearest you that is part of 
                     <a href="http://varsitynewsnetwork.com/">Varsity News Network</a>. I 
-                    (<a href="htt://joefearnley.com">Joe Fearnley</a>) created it as way to learn
+                    (<a href="htt://twitter.com/joefearnley">@joefearnley</a>) created it as way to learn
                     more about HTML5 geolocation.
                 </p>
                 <p>
