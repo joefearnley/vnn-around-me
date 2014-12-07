@@ -9,37 +9,52 @@ $(window).scroll(function() {
 $(function() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var jqxhr = $.get('/school/find', {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            });
+            var ref = new Firebase('https://vnn-around-me.firebaseio.com');
+            var geoFire = new GeoFire(ref);
 
-            jqxhr.done(function(response) {
-                loadMap(position, response);
-                // update header with closest school and information about it. 
-            });
+            // Attach an asynchronous callback to read the data at our posts reference
+            ref.on('value', function(snapshot) {
+                var schools = snapshot.val().data;
+                var length = schools.length;
+                var closestSchool = null;
+                var shortestDistance = 0;
+                for (var i = 0; i < length; i++) {
+                    var userLocation = [position.coords.latitude, position.coords.longitude];
+                    var schoolLocation = [parseFloat(schools[i].latitude), parseFloat(schools[i].longitude)];
 
-            jqxhr.fail(function(response) {
-                if(response.status == '404') {
-                    $('#map').html(response.responseText);
+                    distance = GeoFire.distance(userLocation, schoolLocation);
+                    
+                    if(i === 0) {
+                        shortestDistance = distance;
+                        closestSchool = schools[i];
+                    } else if(distance < shortestDistance) {
+                        shortestDistance = distance;
+                        closestSchool = schools[i];
+                    }
                 }
+
+                loadMap(position, closestSchool);
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+                $('#map').html(errorObject.code);
             });
+
         }, function() {
-            console.log('Geolocation service failed.');
+            $('#map').html('Geolocation service failed.');
         });
     } else {
-        console.log('Browser does not support Geolocation');
+        $('#map').html('Browser does not support Geolocation');
     }
 });
 
 function loadMap(position, school) {
+    console.log('loading map');
     var mapOptions = {
         zoom: 13,
         center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
         disableDefaultUI: true,
         scrollwheel: false,
         draggable: true,
-        //styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]}]
     };
 
     var mapElement = document.getElementById('map');
@@ -96,7 +111,6 @@ function loadMap(position, school) {
             }
 
             endingMarkerContent += '</div></div>';
-                
             var endInfowindow = new google.maps.InfoWindow();
             endInfowindow.setContent(endingMarkerContent);
             endInfowindow.open(map, endMarker); 

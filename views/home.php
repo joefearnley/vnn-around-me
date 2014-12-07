@@ -68,6 +68,8 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.easing.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+<script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/geofire/3.2.0/geofire.min.js"></script>
 <script src="assets/js/grayscale.js"></script>
 </body>
 </html>
