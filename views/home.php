@@ -69,6 +69,5 @@
 <script src="assets/js/jquery.easing.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 <script src="assets/js/grayscale.js"></script>
-
 </body>
 </html>
