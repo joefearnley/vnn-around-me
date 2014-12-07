@@ -5,4 +5,4 @@ VNN Around Me finds the school nearest you that is part of
 ([@joefearnley](http://twitter.com/joefearnley))
 created it as way to learn more about HTML5 geolocation.
 
-[Check it out](http://vnn-around-me.eu1.frbit.net/)
+[Check it out](http://joefearnley.com/vnn-around-me)
