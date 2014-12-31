@@ -10,9 +10,9 @@ $(function() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var ref = new Firebase('https://vnn-around-me.firebaseio.com');
-			var geoFire = new GeoFire(ref);
+            var geoFire = new GeoFire(ref);
 
-			ref.on('value', function(snapshot) {
+            ref.on('value', function(snapshot) {
                 var schools = snapshot.val().data;
                 var length = schools.length;
                 var closestSchool = null;
