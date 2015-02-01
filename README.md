@@ -5,7 +5,7 @@ VNN Around Me finds the school nearest you that is part of
 ([@joefearnley](http://twitter.com/joefearnley)) created it as 
 way to learn more about HTML5 geolocation. 
 
-The front-end code is currently located in the the
+The front-end code is currently located in the
 [gh-pages branch](https://github.com/joefearnley/vnn-around-me/tree/gh-pages). 
 The master branch currently consists of the code for crawling the individual sites.
 
